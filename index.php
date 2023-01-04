@@ -34,13 +34,15 @@
                         </div>
 
                         <?php endwhile;?>
+
                     </div>
                 </div>
-                <div class="col-lg-4">Sidebar</div>
+                <div class="col-lg-4"><?php get_sidebar(); ?></div>
             </div>
+            <?php burn_pagination();?>
         </div>
     </section>
-    <?php } else { get_template_part( 'template-parts/content' );}?>
+    <?php  } else { get_template_part( 'template-parts/content-none' );}?>
 
 </main><!-- End #main -->
 <?php get_footer();?>

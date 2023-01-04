@@ -24,3 +24,58 @@ function get_the_post_custom_thumbnail ($post_id, $size='featured_thumbnail', $a
 function the_post_custom_thumbnail($post_id, $size='featured_thumbnail', $additional_attributes=[]){
     echo get_the_post_custom_thumbnail( $post_id, $size, $additional_attributes );
 }
+
+function burn_posted_on() {
+
+	$year                        = get_the_date( 'Y' );
+	$month                       = get_the_date( 'n' );
+	$day                         = get_the_date( 'j' );
+	$post_date_archive_permalink = get_day_link( $year, $month, $day );
+
+	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+
+	// Post is modified ( when post published time is not equal to post modified time )
+	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s"> Updated on %4$s</time>';
+	}
+
+	$time_string = sprintf( $time_string,
+		esc_attr( get_the_date( DATE_W3C ) ),
+		esc_attr( get_the_date() ),
+		esc_attr( get_the_modified_date( DATE_W3C ) ),
+		esc_attr( get_the_modified_date() )
+	);
+
+	$posted_on = sprintf(
+		esc_html_x( 'Posted on %s', 'post date', 'burn' ),
+		'<a href="' . esc_url( $post_date_archive_permalink ) . '" rel="bookmark">' . $time_string . '</a>'
+	);
+
+	echo '<span class="posted-on text-secondary">' . $posted_on . '</span>';
+}
+
+
+/**
+ * Burn Pagination.
+ *
+ * @return void
+ */
+function burn_pagination() {
+
+	$allowed_tags = [
+		'span' => [
+			'class' => []
+		],
+		'a' => [
+			'class' => [],
+			'href' => [],
+		]
+	];
+
+	$args = [
+		'before_page_number' => '<span class="btn border border-secondary mr-2 mb-2">',
+		'after_page_number' => '</span>',
+	];
+
+	printf( '<nav class="burn-pagination clearfix">%s</nav>', wp_kses( paginate_links( $args ), $allowed_tags ) );
+}
