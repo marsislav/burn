@@ -12,6 +12,7 @@ if ( ! defined( 'BURN_DIR_URI' ) ) {
 }
 
 require_once BURN_DIR_PATH . '/inc/helpers/autoloader.php';
+require_once BURN_DIR_PATH . '/inc/helpers/template-tags.php';
 
 function burn_get_theme_instance () {
 \BURN_THEME\Inc\BURN_THEME::get_instance();

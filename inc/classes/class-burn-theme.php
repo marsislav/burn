@@ -10,6 +10,7 @@ class BURN_THEME {
     protected function __construct() {
         //load class
         Assets::get_instance();
+        Menus::get_instance();
         $this->setup_hooks();
     }
 
@@ -32,6 +33,12 @@ add_action('after_setup_theme', [ $this, 'setup_theme']);
         ]);
 
         add_theme_support('post-thumbnails');
+
+        /**
+		 * Register image sizes.
+		 */
+		add_image_size( 'featured-thumbnail', 350, 233, true );
+
 
         add_theme_support('customize-selective-refresh-widgets');
 

@@ -21,7 +21,7 @@ class Assets {
 
 public function register_styles () {
     wp_enqueue_style('bootstrap', BURN_DIR_URI.'/assets/vendor/bootstrap/css/bootstrap.min.css');
-    wp_enqueue_style('bootstrap-icons', BURN_DIR_URI.'/assets/vendor/bootstrap-icons/css/bootstrap-icons.css');
+    wp_enqueue_style('bootstrap-icons', BURN_DIR_URI.'/assets/vendor/bootstrap-icons/bootstrap-icons.css');
     wp_enqueue_style('swiper', BURN_DIR_URI.'/assets/vendor/swiper/swiper-bundle.min.css');
     wp_enqueue_style('glightbox', BURN_DIR_URI.'/assets/vendor/glightbox/css/glightbox.min.css');
     //wp_enqueue_style('aos', BURN_DIR_URI.'/assets/vendor/aos/aos.css');

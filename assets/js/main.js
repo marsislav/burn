@@ -1,8 +1,8 @@
 /**
-* Template Name: ZenBlog - v1.3.0
-* Template URL: https://bootstrapmade.com/zenblog-bootstrap-blog-template/
-* Author: BootstrapMade.com
-* License: https:///bootstrapmade.com/license/
+* Template Name: burn - v1.0
+* Template URL: https://burn.marsislav.net
+* Author: Marsislav
+* License: GNU/ GPL
 */
 document.addEventListener('DOMContentLoaded', () => {
   "use strict";
