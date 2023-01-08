@@ -12,6 +12,7 @@ class BURN_THEME {
         Assets::get_instance();
         Menus::get_instance();
         Sidebars::get_instance();
+        Block_Patterns::get_instance();
         $this->setup_hooks();
     }
 
@@ -55,9 +56,13 @@ add_action('after_setup_theme', [ $this, 'setup_theme']);
             'style'
         ]);
         
-        add_editor_style();
+    
         add_theme_support('wp-block-styles');
         add_theme_support('align-wide');
+        add_editor_style('assets/css/editor.css');
+
+        /*Remove core block patterns */
+        remove_theme_support('core-block-patterns');
 
         if (!isset($content_width)){
             $content_width=1280;
