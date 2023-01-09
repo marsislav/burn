@@ -136,9 +136,9 @@ section {
   height: 70px;
 }
 
-.header .logo img {
-  max-height: 40px;
-  margin-right: 6px;
+a.custom-logo-link img {
+  width: auto;
+  height: 80px;
 }
 
 .header .logo h1 {
@@ -1378,4 +1378,11 @@ section {
   width: auto;
   z-index: 100000;
   /* Above WP toolbar. */
+}
+.aligncenter {
+  text-align:center;
+}
+.photo img {
+  max-width: 100%;
+  height: auto;
 }

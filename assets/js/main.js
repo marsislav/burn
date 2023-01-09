@@ -4,6 +4,8 @@
 * Author: Marsislav
 * License: GNU/ GPL
 */
+
+
 document.addEventListener('DOMContentLoaded', () => {
   "use strict";
 
@@ -72,6 +74,109 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   });
 
+/**
+ * Slide idebar
+ * /
+ /**
+ ** HELPER FUNCTIONS
+ */
+const qSel = (obj) => document.querySelector(obj);
+const qSelAll = (obj) => document.querySelectorAll(obj);
+
+/**
+ ** GLOBAL VARIABLES
+ */
+const nav = qSel('#nav');
+const nav_container = qSel('#nav_icon');
+const nav_icon = qSel('#nav_icon > i');
+const nav_links = qSelAll('#nav > ul > li > a');
+
+/**
+ ** OPEN SIDEBAR
+ */
+nav_container.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+        closeSidebar();
+        return;
+    }
+    
+    nav.classList.add('open');
+    nav_icon.classList.add('rotate');
+});
+
+/**
+ ** CLOSE SIDEBAR AFTER CLICK ON LINK 
+ */
+nav_links.forEach(link => {
+    link.addEventListener('click', e => {
+        e.stopPropagation();
+        closeSidebar();
+    });
+});
+
+/**
+ ** MOUSE TRACK EVENT 
+ */
+if (innerWidth > 1024) {
+    // Mouse move event
+    window.addEventListener('mousemove', e => {
+        const mouseY = Math.round((e.y * 100) / innerHeight);
+        const mouseX = Math.round((e.x * 100) / innerWidth);
+
+        // Detect mouse position
+        if (!nav.classList.contains('open') && mouseX <= 20) {
+            nav_container.style.top = `${mouseY}%`;
+            nav_container.classList.add('mouseDistance');
+        } else {
+            nav_container.classList.remove('mouseDistance');
+            nav_container.style.top = '50%';
+        }
+        
+        // Check mouse distance to nav
+        mouseX <= 10 ? 
+            nav_container.classList.add('mouseDistanceCloser') : 
+            nav_container.classList.remove('mouseDistanceCloser');
+            
+        if (nav.classList.contains('open') || (mouseY >= 90 || mouseY <= 10)) resetNavIcon();
+    }); 
+    
+    // Mouse leave window
+    document.addEventListener('mouseleave', () => {
+        closeSidebar();
+        resetNavIcon();
+    });
+};
+
+/**
+ ** CLOSE SIDEBAR WHILE CLICKING OUTSIDE
+ */
+window.addEventListener('click', e => {
+    e.stopPropagation();
+    if (!nav.classList.contains('open')) return;
+    if (!e.target.closest('nav')) {
+        closeSidebar();
+        resetNavIcon();
+    }
+});
+
+/**
+ ** CLOSE SIDEBAR
+ */
+function closeSidebar() {
+    nav.classList.remove('open');
+    nav_icon.classList.remove('rotate');
+}
+
+/**
+ ** RESET NAV ICON
+ */
+function resetNavIcon() {
+    nav_container.classList.remove('mouseDistance');
+    nav_container.classList.remove('mouseDistanceCloser');
+    nav_container.style.top = '50%';
+}
+ 
+
   /**
    * Scroll top button
    */
@@ -90,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /**
    * Hero Slider
-   */
+ 
   var swiper = new Swiper(".sliderFeaturedPosts", {
     spaceBetween: 0,
     speed: 500,
@@ -110,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
       prevEl: ".custom-swiper-button-prev",
     },
   });
-
+  */
   /**
    * Open and close the search form.
    */
